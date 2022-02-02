@@ -109,5 +109,10 @@ o_isbn ORDER BY solicitudes DESC LIMIT 1;
 
 --d. Si se cobrara una multa de $100 por cada día de atraso, mostrar cuánto
 -- debería pagar cada usuario que entregue el préstamo después de 7 días.
-SELECT *,(fecha_devolucion-fecha_inicio)-7 as dias_de_atraso, (fecha_devolucion-fecha_inicio)*100-700 as costo_atraso 
+SELECT *,(fecha_devolucion-fecha_inicio) - 7 as dias_de_atraso, (fecha_devolucion-fecha_inicio)*100-700 as costo_atraso 
 FROM prestamos WHERE Fecha_devolucion-fecha_inicio > 7;
+
+SELECT socios.nombre, libros.titulo, (fecha_devolucion-fecha_inicio)-7 as dias_de_atraso, (fecha_devolucion-fecha_inicio)*100-700 as costo_atraso 
+FROM prestamos join socios on socios.rut = prestamos.socio_rut join libros on libros.isbn = prestamos.libro_isbn;
+
+
